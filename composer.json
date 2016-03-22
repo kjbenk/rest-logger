@@ -1,0 +1,30 @@
+{
+    "name": "kjbenk/rest-logger",
+    "type": "wordpress-plugin",
+    "description": "A WordPress Plugin that logs WP-API REST Requests.",
+    "homepage": "https://github.com/kjbenk/rest-logger",
+    "license": "GPL2+",
+    "authors": [
+        {
+            "name": "Kyle Benk",
+            "homepage": "http://kylebenk.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/kjbenk/rest-logger/issues"
+    },
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "2.3.4",
+        "wp-coding-standards/wpcs": "0.6.0"
+    },
+    "extra": {
+        "installer-name": "json-rest-api-rest-logger"
+    },
+    "scripts": {
+        "post-install-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/wp-coding-standards/wpcs",
+        "post-update-cmd" : "\"vendor/bin/phpcs\" --config-set installed_paths vendor/wp-coding-standards/wpcs"
+    }
+}
