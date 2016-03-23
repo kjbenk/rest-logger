@@ -9,4 +9,7 @@
 		<exclude name="WordPress.CSRF.NonceVerification" />
 		<exclude name="WordPress.XSS.EscapeOutput" />
 	</rule>
+	<rule ref="WordPress-Core"></rule>
+	<rule ref="WordPress-Extra"></rule>
+	<rule ref="WordPress-Docs"></rule>
 </ruleset>
