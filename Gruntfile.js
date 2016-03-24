@@ -35,10 +35,6 @@ module.exports = function( grunt ) {
 			'multisite': {
 				cmd: 'phpunit',
 				args: ['-c', 'multisite.xml']
-			},
-			'codecoverage': {
-				cmd: 'phpunit',
-				args: ['-c', 'codecoverage.xml']
 			}
 		}
 

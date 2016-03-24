@@ -13,4 +13,76 @@ require_once( 'header.php' ); ?>
 
 <h1><?php esc_attr_e( 'Settings', 'rlg' ); ?></h1>
 
+<form method="post">
+	<table class="form-table">
+		<h3><?php esc_attr_e( 'Log a Request with a Status of:', 'rlg' ); ?></h3>
+		<tbody>
+
+			<tr>
+				<th scope="row"><?php esc_attr_e( 'Informational', 'rlg' ); ?></th>
+				<td>
+					<fieldset>
+						<label for="rlg-log-informational-requests">
+							<input type="checkbox" id="rlg-log-informational-requests" name="rlg-log-informational-requests" <?php echo ( isset( $settings['log_informational_requests'] ) && $settings['log_informational_requests'] ? 'checked="checked"' : '' ); ?>>
+							<?php esc_attr_e( 'Log informational requests (i.e. status code of 1xx).', 'rlg' ); ?>
+						</label>
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row"><?php esc_attr_e( 'Success', 'rlg' ); ?></th>
+				<td>
+					<fieldset>
+						<label for="rlg-log-success-requests">
+							<input type="checkbox" id="rlg-log-success-requests" name="rlg-log-success-requests" <?php echo ( isset( $settings['log_success_requests'] ) && $settings['log_success_requests'] ? 'checked="checked"' : '' ); ?>>
+							<?php esc_attr_e( 'Log success requests (i.e. status code of 2xx).', 'rlg' ); ?>
+						</label>
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row"><?php esc_attr_e( 'Redirection', 'rlg' ); ?></th>
+				<td>
+					<fieldset>
+						<label for="rlg-log-redirection-requests">
+							<input type="checkbox" id="rlg-log-redirection-requests" name="rlg-log-redirection-requests" <?php echo ( isset( $settings['log_redirection_requests'] ) && $settings['log_redirection_requests'] ? 'checked="checked"' : '' ); ?>>
+							<?php esc_attr_e( 'Log redirection requests (i.e. status code of 3xx).', 'rlg' ); ?>
+						</label>
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row"><?php esc_attr_e( 'Client Error', 'rlg' ); ?></th>
+				<td>
+					<fieldset>
+						<label for="rlg-log-client-error-requests">
+							<input type="checkbox" id="rlg-log-client-error-requests" name="rlg-log-client-error-requests" <?php echo ( isset( $settings['log_client_error_requests'] ) && $settings['log_client_error_requests'] ? 'checked="checked"' : '' ); ?>>
+							<?php esc_attr_e( 'Log error requests (i.e. status code of 4xx).', 'rlg' ); ?>
+						</label>
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row"><?php esc_attr_e( 'Server Error', 'rlg' ); ?></th>
+				<td>
+					<fieldset>
+						<label for="rlg-log-server-error-requests">
+							<input type="checkbox" id="rlg-log-server-error-requests" name="rlg-log-server-error-requests" <?php echo ( isset( $settings['log_server_error_requests'] ) && $settings['log_server_error_requests'] ? 'checked="checked"' : '' ); ?>>
+							<?php esc_attr_e( 'Log error requests (i.e. status code of 5xx).', 'rlg' ); ?>
+						</label>
+					</fieldset>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<?php wp_nonce_field( 'rlg-save-settings' ); ?>
+	<?php submit_button(); ?>
+</form>
+
 <?php require_once( 'footer.php' );

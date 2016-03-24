@@ -100,16 +100,28 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 			$wpdb->insert(
 				$this->get_table_name(),
 				array(
-					'status' => $data['response']->get_status(),
+					'status' => (int) $data['response']->get_status(),
 					'date'   => date( $this->date_format, time() ),
 					'route'  => $data['request']->get_route(),
 					'method' => $data['request']->get_method(),
-					'user'   => wp_get_current_user(),
+					'user'   => get_current_user_id(),
 					'ip'     => $_SERVER['REMOTE_ADDR'],
 				)
 			); // WPCS: db call ok.
 
 			return $wpdb->insert_id;
+		}
+
+		/**
+		 * Delete the log table.
+		 */
+		function delete_table() {
+			global $wpdb;
+
+			$sql = 'DROP TABLE ' . $this->get_table_name();
+
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			dbDelta( $sql );
 		}
 
 		/**
