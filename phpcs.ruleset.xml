@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="REST-Logger">
+	<exclude-pattern>*/core/*</exclude-pattern>
+	<exclude-pattern>*/wp-api/*</exclude-pattern>
 	<rule ref="WordPress-VIP">
 		<exclude name="WordPress.VIP.FileSystemWritesDisallow" />
 		<exclude name="WordPress.VIP.RestrictedFunctions" />
