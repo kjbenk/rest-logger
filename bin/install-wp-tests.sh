@@ -66,6 +66,10 @@ install_wp() {
 	download https://raw.github.com/markoheijnen/wp-mysqli/master/db.php $WP_CORE_DIR/wp-content/db.php
 }
 
+install_wp_api() {
+	git clone https://github.com/WP-API/WP-API.git wp-api
+}
+
 install_test_suite() {
 	# portable in-place argument for both GNU sed and Mac OSX sed
 	if [[ $(uname -s) == 'Darwin' ]]; then
@@ -116,5 +120,6 @@ install_db() {
 }
 
 install_wp
+install_wp_api
 install_test_suite
 install_db
