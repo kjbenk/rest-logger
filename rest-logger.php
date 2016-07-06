@@ -61,7 +61,7 @@ if ( ! class_exists( 'REST_Logger' ) ) :
 		 * @return void
 		 */
 		public function __clone() {
-			_doing_it_wrong( __FUNCTION__, esc_attr__( 'You cannot __clone an instance of the REST_Logger class.', REST_LOGGER_TEXT_DOMAIN ), '1.6' );
+			_doing_it_wrong( __FUNCTION__, esc_attr__( 'You cannot __clone an instance of the REST_Logger class.', 'rest-logger' ), '1.6' );
 		}
 
 		/**
@@ -71,7 +71,7 @@ if ( ! class_exists( 'REST_Logger' ) ) :
 		 * @return void
 		 */
 		public function __wakeup() {
-			_doing_it_wrong( __FUNCTION__, esc_attr__( 'You cannot __wakeup an instance of the REST_Logger class.', REST_LOGGER_TEXT_DOMAIN ), '1.6' );
+			_doing_it_wrong( __FUNCTION__, esc_attr__( 'You cannot __wakeup an instance of the REST_Logger class.', 'rest-logger' ), '1.6' );
 		}
 
 		/**
@@ -90,11 +90,6 @@ if ( ! class_exists( 'REST_Logger' ) ) :
 			// Plugin name.
 			if ( ! defined( 'REST_LOGGER_NAME' ) ) {
 				define( 'REST_LOGGER_NAME', 'Rest Logger' );
-			}
-
-			// Plugin text domain.
-			if ( ! defined( 'REST_LOGGER_TEXT_DOMAIN' ) ) {
-				define( 'REST_LOGGER_TEXT_DOMAIN', 'rlg' );
 			}
 
 			// Plugin version.
@@ -153,7 +148,7 @@ if ( ! class_exists( 'REST_Logger' ) ) :
 		 * @return void
 		 */
 		public function load_textdomain() {
-			load_textdomain( REST_LOGGER_TEXT_DOMAIN , dirname( plugin_basename( REST_LOGGER_PLUGIN_FILE ) ) . '/languages/' );
+			load_textdomain( 'rest-logger' , dirname( plugin_basename( REST_LOGGER_PLUGIN_FILE ) ) . '/languages/' );
 		}
 	}
 
@@ -163,7 +158,7 @@ endif; // End if class_exists check.
  * This is the function you will use in order to obtain an instance
  * of the REST_Logger class.
  *
- * Example: <?php $REST_Logger = REST_LOGGER_instance(); ?>
+ * Example: <?php $rest_Logger = rest_logger_instance(); ?>
  *
  * @access public
  */
