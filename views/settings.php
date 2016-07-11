@@ -11,68 +11,68 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once( 'header.php' ); ?>
 
-<h1><?php esc_attr_e( 'Settings', 'rlg' ); ?></h1>
+<h1><?php esc_attr_e( 'Settings', 'rest-logger' ); ?></h1>
 
 <form method="post">
 	<table class="form-table">
-		<h3><?php esc_attr_e( 'Log a Request with a Status of:', 'rlg' ); ?></h3>
+		<h3><?php esc_attr_e( 'Log a Request with a Status of:', 'rest-logger' ); ?></h3>
 		<tbody>
 
 			<tr>
-				<th scope="row"><?php esc_attr_e( 'Informational', 'rlg' ); ?></th>
+				<th scope="row"><?php esc_attr_e( 'Informational', 'rest-logger' ); ?></th>
 				<td>
 					<fieldset>
 						<label for="rlg-log-informational-requests">
 							<input type="checkbox" id="rlg-log-informational-requests" name="rlg-log-informational-requests" <?php echo ( isset( $settings['log_informational_requests'] ) && $settings['log_informational_requests'] ? 'checked="checked"' : '' ); ?>>
-							<?php esc_attr_e( 'Log informational requests (i.e. status code of 1xx).', 'rlg' ); ?>
+							<?php esc_attr_e( 'Log informational requests (i.e. status code of 1xx).', 'rest-logger' ); ?>
 						</label>
 					</fieldset>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row"><?php esc_attr_e( 'Success', 'rlg' ); ?></th>
+				<th scope="row"><?php esc_attr_e( 'Success', 'rest-logger' ); ?></th>
 				<td>
 					<fieldset>
 						<label for="rlg-log-success-requests">
 							<input type="checkbox" id="rlg-log-success-requests" name="rlg-log-success-requests" <?php echo ( isset( $settings['log_success_requests'] ) && $settings['log_success_requests'] ? 'checked="checked"' : '' ); ?>>
-							<?php esc_attr_e( 'Log success requests (i.e. status code of 2xx).', 'rlg' ); ?>
+							<?php esc_attr_e( 'Log success requests (i.e. status code of 2xx).', 'rest-logger' ); ?>
 						</label>
 					</fieldset>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row"><?php esc_attr_e( 'Redirection', 'rlg' ); ?></th>
+				<th scope="row"><?php esc_attr_e( 'Redirection', 'rest-logger' ); ?></th>
 				<td>
 					<fieldset>
 						<label for="rlg-log-redirection-requests">
 							<input type="checkbox" id="rlg-log-redirection-requests" name="rlg-log-redirection-requests" <?php echo ( isset( $settings['log_redirection_requests'] ) && $settings['log_redirection_requests'] ? 'checked="checked"' : '' ); ?>>
-							<?php esc_attr_e( 'Log redirection requests (i.e. status code of 3xx).', 'rlg' ); ?>
+							<?php esc_attr_e( 'Log redirection requests (i.e. status code of 3xx).', 'rest-logger' ); ?>
 						</label>
 					</fieldset>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row"><?php esc_attr_e( 'Client Error', 'rlg' ); ?></th>
+				<th scope="row"><?php esc_attr_e( 'Client Error', 'rest-logger' ); ?></th>
 				<td>
 					<fieldset>
 						<label for="rlg-log-client-error-requests">
 							<input type="checkbox" id="rlg-log-client-error-requests" name="rlg-log-client-error-requests" <?php echo ( isset( $settings['log_client_error_requests'] ) && $settings['log_client_error_requests'] ? 'checked="checked"' : '' ); ?>>
-							<?php esc_attr_e( 'Log error requests (i.e. status code of 4xx).', 'rlg' ); ?>
+							<?php esc_attr_e( 'Log error requests (i.e. status code of 4xx).', 'rest-logger' ); ?>
 						</label>
 					</fieldset>
 				</td>
 			</tr>
 
 			<tr>
-				<th scope="row"><?php esc_attr_e( 'Server Error', 'rlg' ); ?></th>
+				<th scope="row"><?php esc_attr_e( 'Server Error', 'rest-logger' ); ?></th>
 				<td>
 					<fieldset>
 						<label for="rlg-log-server-error-requests">
 							<input type="checkbox" id="rlg-log-server-error-requests" name="rlg-log-server-error-requests" <?php echo ( isset( $settings['log_server_error_requests'] ) && $settings['log_server_error_requests'] ? 'checked="checked"' : '' ); ?>>
-							<?php esc_attr_e( 'Log error requests (i.e. status code of 5xx).', 'rlg' ); ?>
+							<?php esc_attr_e( 'Log error requests (i.e. status code of 5xx).', 'rest-logger' ); ?>
 						</label>
 					</fieldset>
 				</td>

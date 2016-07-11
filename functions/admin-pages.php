@@ -21,8 +21,8 @@ function rlg_menu() {
 
 	// Log.
 	add_menu_page(
-		__( REST_LOGGER_NAME, 'rlg' ),
-		__( REST_LOGGER_NAME, 'rlg' ),
+		__( REST_LOGGER_NAME, 'rest-logger' ),
+		__( REST_LOGGER_NAME, 'rest-logger' ),
 		'edit_posts',
 		'rlg-log',
 		'rlg_log',
@@ -32,8 +32,8 @@ function rlg_menu() {
 	// Log.
 	$log_page_load = add_submenu_page(
 		'rlg-log',
-		__( 'Log', 'rlg' ),
-		__( 'Log', 'rlg' ),
+		__( 'Log', 'rest-logger' ),
+		__( 'Log', 'rest-logger' ),
 		'edit_posts',
 		'rlg-log',
 		'rlg_log'
@@ -48,8 +48,8 @@ function rlg_menu() {
 	// Settings.
 	$settings_page_load = add_submenu_page(
 		'rlg-log',
-		__( 'Settings', 'rlg' ),
-		__( 'Settings', 'rlg' ),
+		__( 'Settings', 'rest-logger' ),
+		__( 'Settings', 'rest-logger' ),
 		'manage_options',
 		'rlg-settings',
 		'rlg_settings'
