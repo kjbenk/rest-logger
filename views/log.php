@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once( 'header.php' ); ?>
 
-<h1><?php esc_attr_e( 'Log', 'rlg' ); ?></h1>
+<h1><?php esc_attr_e( 'Log', 'rest-logger' ); ?></h1>
 
 <form method="post" class="rlg-log-form">
 	<input type="hidden" name="page" value="<?php echo ( isset( $_REQUEST['page'] ) ? esc_attr__( sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) ) : '' ); // Input var okay. ?>" />

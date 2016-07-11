@@ -28,8 +28,8 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 		 */
 		public function __construct() {
 			parent::__construct( array(
-				'singular' => __( 'Request', 'rlg' ),
-				'plural'   => __( 'Requests', 'rlg' ),
+				'singular' => __( 'Request', 'rest-logger' ),
+				'plural'   => __( 'Requests', 'rest-logger' ),
 				'ajax'     => false,
 			) );
 		}
@@ -41,7 +41,7 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 		 * @return void
 		 */
 		public function no_items() {
-			esc_attr_e( 'No Requests found.', 'rlg' );
+			esc_attr_e( 'No Requests found.', 'rest-logger' );
 		}
 
 		/**
@@ -79,10 +79,10 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 		 * @access public
 		 */
 		function get_columns() {
-			$columns['status'] = __( 'Status', 'rlg' );
-			$columns['date']   = __( 'Date', 'rlg' );
-			$columns['route']  = __( 'Route', 'rlg' );
-			$columns['method'] = __( 'Method', 'rlg' );
+			$columns['status'] = __( 'Status', 'rest-logger' );
+			$columns['date']   = __( 'Date', 'rest-logger' );
+			$columns['route']  = __( 'Route', 'rest-logger' );
+			$columns['method'] = __( 'Method', 'rest-logger' );
 
 			return apply_filters( 'rlg_log_table_columns', $columns );
 		}
