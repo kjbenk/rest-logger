@@ -62,6 +62,8 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$this->items = $rest_logger_model->get_data();
 			$total_items = count( $this->items );
 
+			usort( $this->items, array( $this, 'sort_items' ) );
+
 			$this->set_pagination_args( array(
 				'total_items' => $total_items, 	// We have to calculate the total number of items.
 				'per_page'    => $per_page, 	// We have to determine how many items to show on a page.
@@ -86,6 +88,49 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 		}
 
 		/**
+		 * Get all the sortable columns.
+		 *
+		 * @access public
+		 */
+		function get_sortable_columns() {
+			$sortable_columns['status'] = array( 'status', true );
+			$sortable_columns['date']   = array( 'date', true );
+			$sortable_columns['route']  = array( 'route', true );
+			$sortable_columns['method'] = array( 'method', true );
+
+			return apply_filters( 'rlg_log_table_sortable_columns', $sortable_columns );
+		}
+
+		/**
+		 * Compare two values for sorting.
+		 *
+		 * @param  mixed $a First value.
+		 * @param  mixed $b Second value.
+		 * @return bool     The comparision.
+		 */
+		function sort_items( $a, $b ) {
+			if ( $a[ $this->get_orderby() ] === $b[ $this->get_orderby() ] ) {
+				return 0;
+			}
+
+			$a_val = $a[ $this->get_orderby() ];
+			$b_val = $b[ $this->get_orderby() ];
+
+			if ( 'date' === $this->get_orderby() ) {
+				$a_val = strtotime( $a_val );
+				$b_val = strtotime( $b_val );
+			}
+
+			$comparison = $a_val < $b_val;
+
+			if ( 'asc' === $this->get_order() ) {
+				$comparison = $a_val > $b_val;
+			}
+
+			return $comparison ? -1 : 1;
+		}
+
+		/**
 		 * Default Column Value
 		 *
 		 * @access public
@@ -104,6 +149,36 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			}
 
 			return apply_filters( 'rlg_log_table_column_default', $output );
+		}
+
+		/**
+		 * Get the orderby param.
+		 *
+		 * @return string $orderby The orderby param.
+		 */
+		private function get_orderby() {
+			$orderby = $_POST['orderby'];
+
+			if ( empty( $orderby ) ) {
+				$orderby = $_GET['orderby'];
+			}
+
+			return ! empty( $orderby ) ? wp_unslash( $orderby ) : 'date';
+		}
+
+		/**
+		 * Get the order param.
+		 *
+		 * @return string $order The order param.
+		 */
+		private function get_order() {
+			$order = $_POST['order'];
+
+			if ( empty( $order ) ) {
+				$order = $_GET['order'];
+			}
+
+			return ! empty( $order ) ? wp_unslash( $order ) : 'asc';
 		}
 	}
 
