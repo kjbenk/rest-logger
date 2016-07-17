@@ -27,6 +27,13 @@ if ( ! class_exists( 'RLG_Requests_Model_Table' ) ) :
 		public $table_name = 'rlg_requests';
 
 		/**
+		 * Make sure the table exists.
+		 */
+		function __construct() {
+			$this->create_table();
+		}
+
+		/**
 		 * Create a table for the requests
 		 *
 		 * @access public

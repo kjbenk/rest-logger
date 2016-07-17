@@ -28,10 +28,10 @@ if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 	$test_root = '/tmp/wordpress-tests-lib';
 }
 
-if ( file_exists( dirname( dirname( __FILE__ ) ) . '/wp-api/plugin.php' ) ) {
-	define( 'WP_API_ROOT', dirname( dirname( __FILE__ ) ) . '/wp-api' );
-} else if ( dirname( dirname( dirname( __FILE__ ) ) ) . '/wp-api/plugin.php' ) {
-	define( 'WP_API_ROOT', dirname( dirname( dirname( __FILE__ ) ) ) . '/wp-api' );
+if ( file_exists( dirname( dirname( __FILE__ ) ) . '/rest-api/plugin.php' ) ) {
+	define( 'WP_API_ROOT', dirname( dirname( __FILE__ ) ) . '/rest-api' );
+} else if ( dirname( dirname( dirname( __FILE__ ) ) ) . '/rest-api/plugin.php' ) {
+	define( 'WP_API_ROOT', dirname( dirname( dirname( __FILE__ ) ) ) . '/rest-api' );
 }
 
 require_once $test_root . '/includes/functions.php';
@@ -41,7 +41,8 @@ require_once $test_root . '/includes/functions.php';
  */
 function _manually_load_plugin() {
 	require dirname( dirname( __FILE__ ) ) . '/rest-logger.php';
-	require dirname( dirname( __FILE__ ) ) . '/model/requests.php';
+	require dirname( dirname( __FILE__ ) ) . '/model/interface.logger.php';
+	require dirname( dirname( __FILE__ ) ) . '/model/class.logger.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
