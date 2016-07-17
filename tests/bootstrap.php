@@ -28,10 +28,10 @@ if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 	$test_root = '/tmp/wordpress-tests-lib';
 }
 
-if ( file_exists( dirname( dirname( __FILE__ ) ) . '/rest-api/plugin.php' ) ) {
-	define( 'WP_API_ROOT', dirname( dirname( __FILE__ ) ) . '/rest-api' );
-} else if ( dirname( dirname( dirname( __FILE__ ) ) ) . '/rest-api/plugin.php' ) {
-	define( 'WP_API_ROOT', dirname( dirname( dirname( __FILE__ ) ) ) . '/rest-api' );
+if ( file_exists( dirname( dirname( __FILE__ ) ) . '/wp-api/plugin.php' ) ) {
+	define( 'WP_API_ROOT', dirname( dirname( __FILE__ ) ) . '/wp-api' );
+} else if ( dirname( dirname( dirname( __FILE__ ) ) ) . '/wp-api/plugin.php' ) {
+	define( 'WP_API_ROOT', dirname( dirname( dirname( __FILE__ ) ) ) . '/wp-api' );
 }
 
 require_once $test_root . '/includes/functions.php';
