@@ -55,14 +55,17 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$sortable = $this->get_sortable_columns();
 			$hidden = array();
 			$this->_column_headers = array( $columns, $hidden, $sortable );
-			$per_page     = 20;
+			$per_page = 20;
 			$current_page = $this->get_pagenum();
 
 			$rest_logger_model = new RLG_Requests_Model();
-			$this->items = $rest_logger_model->get_data();
+			$rest_logger_model->setup();
+			$this->items = $rest_logger_model->logger->get_data();
 			$total_items = count( $this->items );
 
-			usort( $this->items, array( $this, 'sort_items' ) );
+			if ( 0 !== $total_items ) {
+				usort( $this->items, array( $this, 'sort_items' ) );
+			}
 
 			$this->set_pagination_args( array(
 				'total_items' => $total_items, 	// We have to calculate the total number of items.
@@ -83,6 +86,7 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$columns['date']   = __( 'Date', 'rest-logger' );
 			$columns['route']  = __( 'Route', 'rest-logger' );
 			$columns['method'] = __( 'Method', 'rest-logger' );
+			$columns['ip'] = __( 'IP', 'rest-logger' );
 
 			return apply_filters( 'rlg_log_table_columns', $columns );
 		}
@@ -97,6 +101,7 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$sortable_columns['date']   = array( 'date', true );
 			$sortable_columns['route']  = array( 'route', true );
 			$sortable_columns['method'] = array( 'method', true );
+			$sortable_columns['ip'] = array( 'ip', true );
 
 			return apply_filters( 'rlg_log_table_sortable_columns', $sortable_columns );
 		}
@@ -141,7 +146,7 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$output = '';
 			switch ( $column_name ) {
 				case 'date':
-					$output = date( 'M j, H:i:s', strtotime( $item[ $column_name ] ) );
+					$output = date( 'M j Y, H:i:s', strtotime( $item[ $column_name ] ) );
 				break;
 				default:
 					$output = $item[ $column_name ];

@@ -16,6 +16,7 @@ if ( isset( $_POST['submit'] ) && check_admin_referer( 'rlg-save-settings' ) ) {
 	$settings['log_redirection_requests'] = isset( $_POST['rlg-log-redirection-requests'] ) && $_POST['rlg-log-redirection-requests'] ? true : false;
 	$settings['log_client_error_requests'] = isset( $_POST['rlg-log-client-error-requests'] ) && $_POST['rlg-log-client-error-requests'] ? true : false;
 	$settings['log_server_error_requests'] = isset( $_POST['rlg-log-server-error-requests'] ) && $_POST['rlg-log-server-error-requests'] ? true : false;
+	$settings['storage_type'] = isset( $_POST['rlg-log-storage-type'] ) ? sanitize_text_field( $_POST['rlg-log-storage-type'] ) : 'option';
 
 	update_option( 'rlg_settings', $settings );
 }

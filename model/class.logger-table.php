@@ -2,19 +2,19 @@
 /**
  * Manages all the data within the {$wpdb->prefix}rlg_requests table
  *
- * @package Model / Audits
+ * @package Model / Table Logger
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'RLG_Requests_Model' ) ) :
+if ( ! class_exists( 'RLG_Requests_Model_Table' ) ) :
 
 	/**
 	 * The REST Requests model class
 	 */
-	class RLG_Requests_Model {
+	class RLG_Requests_Model_Table extends RLG_Requests_Model {
 
 		/**
 		 * Table name
@@ -25,31 +25,6 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 		 * @access public
 		 */
 		public $table_name = 'rlg_requests';
-
-		/**
-		 * Data format
-		 *
-		 * (default value: 'Y-m-d H:i:s')
-		 *
-		 * @var string
-		 * @access public
-		 */
-		public $date_format = 'Y-m-d H:i:s';
-
-		/**
-		 * The default request
-		 *
-		 * @access public
-		 * @return array $default_data A default request.
-		 */
-		function default_data() {
-			return array(
-				'status' => '0',
-				'date'   => '',
-				'route'  => '',
-				'method' => 'GET',
-			);
-		}
 
 		/**
 		 * Create a table for the requests
@@ -99,14 +74,7 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 
 			$wpdb->insert(
 				$this->get_table_name(),
-				array(
-					'status' => (int) $data['response']->get_status(),
-					'date'   => date( $this->date_format, time() ),
-					'route'  => $data['request']->get_route(),
-					'method' => $data['request']->get_method(),
-					'user'   => get_current_user_id(),
-					'ip'     => $_SERVER['REMOTE_ADDR'],
-				)
+				$this->obtain_data( $data )
 			); // WPCS: db call ok.
 
 			return $wpdb->insert_id;
