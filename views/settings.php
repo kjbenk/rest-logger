@@ -81,6 +81,26 @@ require_once( 'header.php' ); ?>
 		</tbody>
 	</table>
 
+	<table class="form-table">
+		<h3><?php esc_attr_e( 'Storage', 'rlg' ); ?></h3>
+		<tbody>
+
+			<tr>
+				<th scope="row"><?php esc_attr_e( 'Save log data to:', 'rlg' ); ?></th>
+				<td>
+					<fieldset>
+						<label for="rlg-log-storage-type"></label>
+						<select type="checkbox" id="rlg-log-storage-type" name="rlg-log-storage-type">
+							<option value="option" <?php selected( $settings['storage_type'], 'option', true ); ?>><?php esc_attr_e( 'WordPress Option', 'rlg' ); ?></option>
+							<option value="table" <?php selected( $settings['storage_type'], 'table', true ); ?>><?php esc_attr_e( 'Custom Table', 'rlg' ); ?></option>
+						</select>
+					</fieldset>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
 	<?php wp_nonce_field( 'rlg-save-settings' ); ?>
 	<?php submit_button(); ?>
 </form>

@@ -22,8 +22,8 @@ class RLG_Logger_Test extends WP_Test_REST_Controller_Testcase {
 
 		// Create the logger database table.
 		$rest_logger_model = new RLG_Requests_Model();
-		$rest_logger_model->create_table();
-		$this->logger = $rest_logger_model;
+		$rest_logger_model->setup();
+		$this->logger_object = $rest_logger_model;
 	}
 
 	/**
@@ -46,7 +46,7 @@ class RLG_Logger_Test extends WP_Test_REST_Controller_Testcase {
 		$response = $this->server->dispatch( $request );
 		$this->assertEquals( 200, $response->get_status() );
 
-		$logger_data = $this->logger->get_data();
+		$logger_data = $this->logger_object->logger->get_data();
 		$this->assertEquals( 1, count( $logger_data ) );
 		$this->assertEquals( 200, (int) $logger_data[0]['status'] );
 
@@ -55,7 +55,7 @@ class RLG_Logger_Test extends WP_Test_REST_Controller_Testcase {
 		$response = $this->server->dispatch( $request );
 		$this->assertEquals( 200, $response->get_status() );
 
-		$logger_data = $this->logger->get_data();
+		$logger_data = $this->logger_object->logger->get_data();
 		$this->assertEquals( 1, count( $logger_data ) );
 	}
 
@@ -68,7 +68,7 @@ class RLG_Logger_Test extends WP_Test_REST_Controller_Testcase {
 		$response = $this->server->dispatch( $request );
 		$this->assertEquals( 404, $response->get_status() );
 
-		$logger_data = $this->logger->get_data();
+		$logger_data = $this->logger_object->logger->get_data();
 		$this->assertEquals( 1, count( $logger_data ) );
 		$this->assertEquals( 404, (int) $logger_data[0]['status'] );
 
@@ -77,7 +77,7 @@ class RLG_Logger_Test extends WP_Test_REST_Controller_Testcase {
 		$response = $this->server->dispatch( $request );
 		$this->assertEquals( 404, $response->get_status() );
 
-		$logger_data = $this->logger->get_data();
+		$logger_data = $this->logger_object->logger->get_data();
 		$this->assertEquals( 1, count( $logger_data ) );
 	}
 

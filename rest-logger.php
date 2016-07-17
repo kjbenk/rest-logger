@@ -127,13 +127,15 @@ if ( ! class_exists( 'REST_Logger' ) ) :
 			require_once( REST_LOGGER_PLUGIN_DIR . 'functions/logger.php' );
 
 			// Model.
-			require_once( REST_LOGGER_PLUGIN_DIR . 'model/requests.php' );
+			require_once( REST_LOGGER_PLUGIN_DIR . 'model/interface.logger.php' );
+			require_once( REST_LOGGER_PLUGIN_DIR . 'model/class.logger.php' );
 
 			// Classes.
 			require_once( REST_LOGGER_PLUGIN_DIR . 'classes/class.requests-table.php' );
 
 			$rlg_requests = new RLG_Requests_Model();
-			add_action( 'rlg_log_request', array( $rlg_requests, 'add_data' ), 10, 1 );
+			$rlg_requests->setup();
+			add_action( 'rlg_log_request', array( $rlg_requests->logger, 'add_data' ), 10, 1 );
 		}
 
 		/**
