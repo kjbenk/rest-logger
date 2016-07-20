@@ -102,7 +102,9 @@ require_once( 'header.php' ); ?>
 	</table>
 
 	<?php wp_nonce_field( 'rlg-save-settings' ); ?>
-	<?php submit_button(); ?>
+
+	<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', 'rlg' ); ?>">
+	<input type="submit" name="clear-all-data" id="clear-all-data" class="button button-default" value="<?php esc_attr_e( 'Clear All Data', 'rlg' ); ?>">
 </form>
 
 <?php require_once( 'footer.php' );

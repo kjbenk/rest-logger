@@ -133,9 +133,7 @@ if ( ! class_exists( 'REST_Logger' ) ) :
 			// Classes.
 			require_once( REST_LOGGER_PLUGIN_DIR . 'classes/class.requests-table.php' );
 
-			$rlg_requests = new RLG_Requests_Model();
-			$rlg_requests->setup();
-			add_action( 'rlg_log_request', array( $rlg_requests->logger, 'add_data' ), 10, 1 );
+			add_action( 'rlg_log_request', array( RLG_Requests_Model::get_instance()->logger, 'add_data' ), 10, 1 );
 		}
 
 		/**

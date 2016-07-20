@@ -21,7 +21,28 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 		 *
 		 * @var string
 		 */
-		public $date_format = 'Y-m-d H:i:s';
+		static public $date_format = 'Y-m-d H:i:s';
+
+		/**
+		 * The logger.
+		 *
+		 * @var object
+		 */
+		public $logger;
+
+		/**
+		 * Get the datasources.
+		 *
+		 * @return array The list of datasources.
+		 */
+		static function get_datasources() {
+			return array(
+				'table',
+				'option',
+				'json',
+				'csv',
+			);
+		}
 
 		/**
 		 * The default request
@@ -38,14 +59,40 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 		}
 
 		/**
+		 * Instances of child classes.
+		 *
+		 * @var array
+		 */
+		protected static $instances = array();
+
+		/**
+		 * Initialization typically happens via get_instance() method.
+		 */
+		public function __construct() {}
+
+		/**
+		 * Return an instance of a child class.
+		 *
+		 * @return AI_Singleton
+		 */
+		public static function get_instance() {
+			$class = get_called_class();
+			if ( ! isset( self::$instances[ $class ] ) ) {
+				self::$instances[ $class ] = new static;
+				self::$instances[ $class ]->setup();
+			}
+			return self::$instances[ $class ];
+		}
+
+		/**
 		 * Create the new model class and determine which storage system to use.
 		 */
-		function setup() {
-			$storage_type = $this->get_storage_type();
+		static protected function setup() {
+			$storage_type = self::get_instance()->get_storage_type();
 			require_once( REST_LOGGER_PLUGIN_DIR . 'model/class.logger-' . $storage_type . '.php' );
 
 			$class_name = 'RLG_Requests_Model_' . ucfirst( $storage_type );
-			$this->logger = new $class_name();
+			self::get_instance()->logger = new $class_name();
 		}
 
 		/**
@@ -70,7 +117,7 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 		function obtain_data( $data ) {
 			return array(
 				'status' => (int) $data['response']->get_status(),
-				'date'   => date( $this->date_format, time() ),
+				'date'   => date( self::$date_format, time() ),
 				'route'  => $data['request']->get_route(),
 				'method' => $data['request']->get_method(),
 				'ip'     => $_SERVER['REMOTE_ADDR'],
@@ -95,6 +142,13 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 		 * Delete the oldest entry if we have reached out limit.
 		 */
 		function delete_oldest_entry() {}
+
+		/**
+		 * Delete all of the data.
+		 */
+		function delete_all_data() {
+			self::$logger->delete_data();
+		}
 
 		/**
 		 * Validate that the data is in the correct format

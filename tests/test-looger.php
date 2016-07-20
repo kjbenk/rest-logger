@@ -22,7 +22,6 @@ class RLG_Logger_Test extends WP_Test_REST_Controller_Testcase {
 
 		// Create the logger database table.
 		$rest_logger_model = new RLG_Requests_Model();
-		$rest_logger_model->setup();
 		$this->logger_object = $rest_logger_model;
 	}
 

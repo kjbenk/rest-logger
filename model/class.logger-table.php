@@ -90,13 +90,10 @@ if ( ! class_exists( 'RLG_Requests_Model_Table' ) ) :
 		/**
 		 * Delete the log table.
 		 */
-		function delete_table() {
+		function delete_data() {
 			global $wpdb;
-
-			$sql = 'DROP TABLE ' . $this->get_table_name();
-
-			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-			dbDelta( $sql );
+			$sql = 'DELETE FROM ' . $this->get_table_name();
+			$wpdb->query( $sql ); // WPCS: db call ok. // WPCS: cache ok. // WPCS: unprepared SQL ok.
 		}
 
 		/**

@@ -58,9 +58,7 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$per_page = 20;
 			$current_page = $this->get_pagenum();
 
-			$rest_logger_model = new RLG_Requests_Model();
-			$rest_logger_model->setup();
-			$this->items = $rest_logger_model->logger->get_data();
+			$this->items = RLG_Requests_Model::get_instance()->logger->get_data();
 			$total_items = count( $this->items );
 
 			if ( 0 !== $total_items ) {
@@ -162,10 +160,10 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 		 * @return string $orderby The orderby param.
 		 */
 		private function get_orderby() {
-			$orderby = $_POST['orderby'];
-
-			if ( empty( $orderby ) ) {
-				$orderby = $_GET['orderby'];
+			if ( ! empty( $_POST['orderby'] ) ) {
+				$orderby = wp_unslash( $_POST['orderby'] );
+			} else if ( ! empty( $_GET['orderby'] ) ) {
+				$orderby = wp_unslash( $_GET['orderby'] );
 			}
 
 			return ! empty( $orderby ) ? wp_unslash( $orderby ) : 'date';
@@ -177,10 +175,10 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 		 * @return string $order The order param.
 		 */
 		private function get_order() {
-			$order = $_POST['order'];
-
-			if ( empty( $order ) ) {
-				$order = $_GET['order'];
+			if ( ! empty( $_POST['order'] ) ) {
+				$order = wp_unslash( $_POST['order'] );
+			} else if ( ! empty( $_GET['order'] ) ) {
+				$order = wp_unslash( $_GET['order'] );
 			}
 
 			return ! empty( $order ) ? wp_unslash( $order ) : 'asc';
