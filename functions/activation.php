@@ -25,8 +25,9 @@ function rlg_activation() {
 	}
 
 	// Create the logger database table.
-	$rest_logger_model = new RLG_Requests_Model();
-	$rest_logger_model->create_table();
+	if ( 'table' === RLG_Requests_Model::get_instance()->get_storage_type() ) {
+		RLG_Requests_Model::get_instance()->logger->create_table();
+	}
 
 	// Add the transient to redirect.
 	set_transient( '_rlg_activation_redirect', true, 30 );

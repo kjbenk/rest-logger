@@ -21,7 +21,7 @@ if ( ! class_exists( 'RLG_Requests_Model_Option' ) ) :
 		 *
 		 * @var string
 		 */
-		public $option_name = 'rlg_requests';
+		static public $option_name = 'rlg_requests';
 
 		/**
 		 * Get requests
@@ -30,7 +30,7 @@ if ( ! class_exists( 'RLG_Requests_Model_Option' ) ) :
 		 * @return array $requests The filtered requests.
 		 */
 		function get_data( $args = array() ) {
-			$data = get_option( $this->option_name );
+			$data = get_option( self::$option_name );
 
 			if ( false === $data ) {
 				$data = array();
@@ -48,13 +48,20 @@ if ( ! class_exists( 'RLG_Requests_Model_Option' ) ) :
 			$all_data = $this->get_data();
 			$all_data[] = $this->validate_data( $this->obtain_data( $data ) );
 
-			update_option( $this->option_name, $all_data );
+			update_option( self::$option_name, $all_data );
 		}
 
 		/**
 		 * Delete the oldest entry if we have reached out limit.
 		 */
 		function delete_oldest_entry() {}
+
+		/**
+		 * Delete all of the data.
+		 */
+		static function delete_data() {
+			delete_option( self::$option_name );
+		}
 
 		/**
 		 * Validate that the data is in the correct format

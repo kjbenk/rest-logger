@@ -9,6 +9,7 @@ if ( false === ( $settings = get_option( 'rlg_settings' ) ) ) {
 	$settings = array();
 }
 
+// Save options.
 if ( isset( $_POST['submit'] ) && check_admin_referer( 'rlg-save-settings' ) ) {
 
 	$settings['log_informational_requests'] = isset( $_POST['rlg-log-informational-requests'] ) && $_POST['rlg-log-informational-requests'] ? true : false;
@@ -19,6 +20,11 @@ if ( isset( $_POST['submit'] ) && check_admin_referer( 'rlg-save-settings' ) ) {
 	$settings['storage_type'] = isset( $_POST['rlg-log-storage-type'] ) ? sanitize_text_field( $_POST['rlg-log-storage-type'] ) : 'option';
 
 	update_option( 'rlg_settings', $settings );
+}
+
+// Clear all data.
+if ( isset( $_POST['clear-all-data'] ) && check_admin_referer( 'rlg-save-settings' ) ) {
+	RLG_Requests_Model::get_instance()->logger->delete_data();
 }
 
 include_once( REST_LOGGER_PLUGIN_DIR . 'views/settings.php' );
