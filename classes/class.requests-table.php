@@ -61,17 +61,17 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$this->items = RLG_Requests_Model::get_instance()->logger->get_data();
 			$total_items = count( $this->items );
 
-			if ( 0 !== $total_items ) {
+			if ( is_array( $this->items ) && ! empty( $this->items ) ) {
 				usort( $this->items, array( $this, 'sort_items' ) );
+
+				$this->set_pagination_args( array(
+					'total_items' => $total_items, 	// We have to calculate the total number of items.
+					'per_page'    => $per_page, 	// We have to determine how many items to show on a page.
+				) );
+
+				$this->items = array_slice( $this->items,( ( $current_page - 1 ) * $per_page ), $per_page );
+				$this->items = apply_filters( 'rlg_log_table_items', $this->items );
 			}
-
-			$this->set_pagination_args( array(
-				'total_items' => $total_items, 	// We have to calculate the total number of items.
-				'per_page'    => $per_page, 	// We have to determine how many items to show on a page.
-			) );
-
-			$this->items = array_slice( $this->items,( ( $current_page - 1 ) * $per_page ), $per_page );
-			$this->items = apply_filters( 'rlg_log_table_items', $this->items );
 		}
 
 		/**
