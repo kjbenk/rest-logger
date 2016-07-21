@@ -37,10 +37,10 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 		 */
 		static function get_datasources() {
 			return array(
-				'table',
-				'option',
-				'json',
-				'csv',
+				'option' => __( 'WordPress Option' ),
+				'table'  => __( 'Custom Table' ),
+				'JSON'   => __( 'JSON File' ),
+				'CSV'    => __( 'CSV File' ),
 			);
 		}
 
@@ -55,6 +55,7 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 				'date'   => '',
 				'route'  => '',
 				'method' => 'GET',
+				'ip'     => '',
 			);
 		}
 

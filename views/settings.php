@@ -91,8 +91,9 @@ require_once( 'header.php' ); ?>
 					<fieldset>
 						<label for="rlg-log-storage-type"></label>
 						<select type="checkbox" id="rlg-log-storage-type" name="rlg-log-storage-type">
-							<option value="option" <?php selected( $settings['storage_type'], 'option', true ); ?>><?php esc_attr_e( 'WordPress Option', 'rlg' ); ?></option>
-							<option value="table" <?php selected( $settings['storage_type'], 'table', true ); ?>><?php esc_attr_e( 'Custom Table', 'rlg' ); ?></option>
+							<?php foreach ( RLG_Requests_Model::get_datasources() as $key => $datasource ) { ?>
+								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $settings['storage_type'], $key, true ); ?>><?php echo esc_attr( $datasource ); ?></option>
+							<?php } ?>
 						</select>
 					</fieldset>
 				</td>
