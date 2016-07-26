@@ -55,7 +55,7 @@ if ( ! class_exists( 'RLG_Requests_Table' ) ) :
 			$sortable = $this->get_sortable_columns();
 			$hidden = array();
 			$this->_column_headers = array( $columns, $hidden, $sortable );
-			$per_page = 20;
+			$per_page = 25;
 			$current_page = $this->get_pagenum();
 
 			$this->items = RLG_Requests_Model::get_instance()->logger->get_data();

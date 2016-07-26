@@ -56,6 +56,7 @@ if ( ! class_exists( 'RLG_Requests_Model_CSV' ) ) :
 		 * @param array $data The request data.
 		 */
 		function add_data( $data ) {
+			parent::add_data();
 			$all_data = $this->get_data();
 			$all_data[] = $this->validate_data( $this->obtain_data( $data ) );
 
@@ -71,7 +72,18 @@ if ( ! class_exists( 'RLG_Requests_Model_CSV' ) ) :
 		/**
 		 * Delete the oldest entry if we have reached out limit.
 		 */
-		function delete_oldest_entry() {}
+		function delete_oldest_entry() {
+			$all_data = $this->get_data();
+			unset( $all_data[0] );
+
+			$file = fopen( REST_LOGGER_PLUGIN_DIR . 'data/' . self::$filename, 'w+' );
+
+			foreach ( $all_data as $data_item ) {
+				fputcsv( $file, array_values( $data_item ) );
+			}
+
+			fclose( $file );
+		}
 
 		/**
 		 * Delete all of the data.

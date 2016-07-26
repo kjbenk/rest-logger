@@ -45,6 +45,7 @@ if ( ! class_exists( 'RLG_Requests_Model_Option' ) ) :
 		 * @param array $data The request data.
 		 */
 		function add_data( $data ) {
+			parent::add_data();
 			$all_data = $this->get_data();
 			$all_data[] = $this->validate_data( $this->obtain_data( $data ) );
 
@@ -54,7 +55,12 @@ if ( ! class_exists( 'RLG_Requests_Model_Option' ) ) :
 		/**
 		 * Delete the oldest entry if we have reached out limit.
 		 */
-		function delete_oldest_entry() {}
+		function delete_oldest_entry() {
+			$all_data = $this->get_data();
+			unset( $all_data[0] );
+
+			update_option( self::$option_name, $all_data );
+		}
 
 		/**
 		 * Delete all of the data.

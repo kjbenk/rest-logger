@@ -92,9 +92,24 @@ require_once( 'header.php' ); ?>
 						<label for="rlg-log-storage-type"></label>
 						<select type="checkbox" id="rlg-log-storage-type" name="rlg-log-storage-type">
 							<?php foreach ( RLG_Requests_Model::get_datasources() as $key => $datasource ) { ?>
-								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $settings['storage_type'], $key, true ); ?>><?php echo esc_attr( $datasource ); ?></option>
+								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $settings['storage_type'], $key, true ); ?>><?php echo esc_html( $datasource ); ?></option>
 							<?php } ?>
 						</select>
+					</fieldset>
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row"><?php esc_attr_e( 'Limit Logged Requests', 'rlg' ); ?></th>
+				<td>
+					<fieldset>
+						<label for="rlg-log-request-limit"></label>
+						<select type="checkbox" id="rlg-log-request-limit" name="rlg-log-request-limit">
+							<option value="25" <?php selected( $settings['request_limit'], $key, true ); ?>><?php esc_html_e( '25', 'rlg' ); ?></option>
+							<option value="50" <?php selected( $settings['request_limit'], $key, true ); ?>><?php esc_html_e( '50', 'rlg' ); ?></option>
+							<option value="100" <?php selected( $settings['request_limit'], $key, true ); ?>><?php esc_html_e( '100', 'rlg' ); ?></option>
+						</select>
+						<span><?php esc_html_e( 'requests', 'rlg' ); ?></span>
 					</fieldset>
 				</td>
 			</tr>

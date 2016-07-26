@@ -76,6 +76,7 @@ if ( ! class_exists( 'RLG_Requests_Model_Table' ) ) :
 		 * @param array $data The request data.
 		 */
 		function add_data( $data ) {
+			parent::add_data();
 			$data = $this->validate_data( $data );
 			global $wpdb;
 
@@ -93,6 +94,15 @@ if ( ! class_exists( 'RLG_Requests_Model_Table' ) ) :
 		function delete_data() {
 			global $wpdb;
 			$sql = 'DELETE FROM ' . $this->get_table_name();
+			$wpdb->query( $sql ); // WPCS: db call ok. // WPCS: cache ok. // WPCS: unprepared SQL ok.
+		}
+
+		/**
+		 * Delete the oldest entry if we have reached out limit.
+		 */
+		function delete_oldest_entry() {
+			global $wpdb;
+			$sql = 'DELETE FROM `' . $this->get_table_name() . '` WHERE date IS NOT NULL order by date DESC LIMIT 1';
 			$wpdb->query( $sql ); // WPCS: db call ok. // WPCS: cache ok. // WPCS: unprepared SQL ok.
 		}
 
