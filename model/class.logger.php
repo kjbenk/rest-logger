@@ -137,7 +137,17 @@ if ( ! class_exists( 'RLG_Requests_Model' ) ) :
 		 *
 		 * @param array $data The request data.
 		 */
-		function add_data( $data ) {}
+		function add_data( $data ) {
+			// Remove the oldest data point if we hit our request limit.
+			if ( false === ( $settings = get_option( 'rlg_settings' ) ) ) {
+				$settings = array();
+			}
+
+			$data = $this->get_data();
+			if ( ! empty( $settings['request_limit'] ) && $settings['request_limit'] <= count( $data ) ) {
+				$this->delete_oldest_entry();
+			}
+		}
 
 		/**
 		 * Delete the oldest entry if we have reached out limit.

@@ -45,6 +45,7 @@ if ( ! class_exists( 'RLG_Requests_Model_JSON' ) ) :
 		 * @param array $data The request data.
 		 */
 		function add_data( $data ) {
+			parent::add_data();
 			$all_data = $this->get_data();
 			$all_data[] = $this->validate_data( $this->obtain_data( $data ) );
 
@@ -56,7 +57,14 @@ if ( ! class_exists( 'RLG_Requests_Model_JSON' ) ) :
 		/**
 		 * Delete the oldest entry if we have reached out limit.
 		 */
-		function delete_oldest_entry() {}
+		function delete_oldest_entry() {
+			$all_data = $this->get_data();
+			unset( $all_data[0] );
+
+			$file = fopen( REST_LOGGER_PLUGIN_DIR . 'data/' . self::$filename, 'w+' );
+			fwrite( $file, wp_json_encode( $all_data ) );
+			fclose( $file );
+		}
 
 		/**
 		 * Delete all of the data.

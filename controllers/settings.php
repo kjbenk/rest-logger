@@ -18,6 +18,7 @@ if ( isset( $_POST['submit'] ) && check_admin_referer( 'rlg-save-settings' ) ) {
 	$settings['log_client_error_requests'] = isset( $_POST['rlg-log-client-error-requests'] ) && $_POST['rlg-log-client-error-requests'] ? true : false;
 	$settings['log_server_error_requests'] = isset( $_POST['rlg-log-server-error-requests'] ) && $_POST['rlg-log-server-error-requests'] ? true : false;
 	$settings['storage_type'] = isset( $_POST['rlg-log-storage-type'] ) ? sanitize_text_field( $_POST['rlg-log-storage-type'] ) : 'option';
+	$settings['request_limit'] = isset( $_POST['rlg-log-request-limit'] ) ? sanitize_text_field( $_POST['rlg-log-request-limit'] ) : '50';
 
 	update_option( 'rlg_settings', $settings );
 }
